@@ -19,6 +19,7 @@ import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import edu.kaimbu.stormy3.weather.Current;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
 
     public static final String TAG = MainActivity.class.getSimpleName();
-    private CurrentWeather mCurrentWeather;
+    private Current mCurrent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         String jsonData = response.body().string();
                         if (response.isSuccessful()) {
-                            mCurrentWeather = getCurrentDetails(jsonData);
+                            mCurrent = getCurrentDetails(jsonData);
 
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -129,33 +130,33 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void updateDisplay() {
-        mTemperatureLabel.setText(String.valueOf((mCurrentWeather.getTemperature())));
-        mRealFeelLabel.setText("RealFeel: " + mCurrentWeather.getApparentTemperature() + "\u00b0");
-        mTimeLabel.setText("At " + mCurrentWeather.getFormattedTime() + " it will be");
-        mHumidityValue.setText(mCurrentWeather.getHumidity() + "");
-        mPrecipValue.setText(mCurrentWeather.getPrecipChance() + "%");
-        mSummaryLabel.setText(mCurrentWeather.getSummary());
-        mIconImageView.setImageResource(mCurrentWeather.getIconId());
+        mTemperatureLabel.setText(String.valueOf((mCurrent.getTemperature())));
+        mRealFeelLabel.setText("RealFeel: " + mCurrent.getApparentTemperature() + "\u00b0");
+        mTimeLabel.setText("At " + mCurrent.getFormattedTime() + " it will be");
+        mHumidityValue.setText(mCurrent.getHumidity() + "");
+        mPrecipValue.setText(mCurrent.getPrecipChance() + "%");
+        mSummaryLabel.setText(mCurrent.getSummary());
+        mIconImageView.setImageResource(mCurrent.getIconId());
 
     }
 
-    private CurrentWeather getCurrentDetails(String jsonData) throws JSONException {
+    private Current getCurrentDetails(String jsonData) throws JSONException {
         JSONObject forecast =  new JSONObject(jsonData);
         String timezone = forecast.getString("timezone");
 
         JSONObject currently = forecast.getJSONObject("currently");
 
-        CurrentWeather currentWeather = new CurrentWeather();
-        currentWeather.setTemperature(currently.getDouble("temperature"));
-        currentWeather.setHumidity(currently.getDouble("humidity"));
-        currentWeather.setIcon(currently.getString("icon"));
-        currentWeather.setPrecipChance(currently.getDouble("precipProbability"));
-        currentWeather.setSummary(currently.getString("summary"));
-        currentWeather.setTime(currently.getLong("time"));
-        currentWeather.setTimezone(timezone);
-        currentWeather.setApparentTemperature(currently.getDouble("apparentTemperature"));
+        Current current = new Current();
+        current.setTemperature(currently.getDouble("temperature"));
+        current.setHumidity(currently.getDouble("humidity"));
+        current.setIcon(currently.getString("icon"));
+        current.setPrecipChance(currently.getDouble("precipProbability"));
+        current.setSummary(currently.getString("summary"));
+        current.setTime(currently.getLong("time"));
+        current.setTimezone(timezone);
+        current.setApparentTemperature(currently.getDouble("apparentTemperature"));
 
-        return currentWeather;
+        return current;
 
     }
 

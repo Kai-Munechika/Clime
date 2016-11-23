@@ -1,14 +1,16 @@
-package edu.kaimbu.stormy3;
+package edu.kaimbu.stormy3.weather;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import edu.kaimbu.stormy3.R;
+
 /**
  * Created by KaiM on 11/22/16.
  */
 
-public class CurrentWeather {
+public class Current {
     private String mIcon;
     private long mTime;
     private int mTemperature;
