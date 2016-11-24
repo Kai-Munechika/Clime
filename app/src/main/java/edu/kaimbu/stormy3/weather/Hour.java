@@ -16,7 +16,7 @@ public class Hour {
 
 
 
-
+    /* Getters and Setters */
 
     public long getTime() {
         return mTime;

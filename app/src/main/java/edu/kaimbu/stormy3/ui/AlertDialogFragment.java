@@ -1,10 +1,12 @@
-package edu.kaimbu.stormy3;
+package edu.kaimbu.stormy3.ui;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+
+import edu.kaimbu.stormy3.R;
 
 /**
  * Created by KaiM on 11/22/16.

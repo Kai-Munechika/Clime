@@ -3,4 +3,5 @@
     <string name="error_title">Error</string>
     <string name="error_message">There was an error, please try again.</string>
     <string name="errror_ok_button_text">OK</string>
+    <string name="title_activity_daily_forecast">DailyForecastActivity</string>
 </resources>
